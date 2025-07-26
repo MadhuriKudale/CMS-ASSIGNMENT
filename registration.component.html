@@ -1,0 +1,27 @@
+<h2>Registration Form</h2>
+
+<form (ngSubmit)="submitForm()">
+  <input type="text" placeholder="Full Name" [(ngModel)]="formData.fullName" name="fullName" required />
+  <input type="text" placeholder="Mobile Number" [(ngModel)]="formData.mobile" name="mobile" required />
+  <input type="email" placeholder="Email" [(ngModel)]="formData.email" name="email" />
+  <input type="text" placeholder="Child's Name" [(ngModel)]="formData.childName" name="childName" />
+  <input type="text" placeholder="Grade/Class" [(ngModel)]="formData.grade" name="grade" />
+  <input type="text" placeholder="Address" [(ngModel)]="formData.address" name="address" required />
+
+  <button type="button" (click)="generateOTP()">Generate OTP</button>
+
+  <div *ngIf="timer > 0">Wait {{ timer }}s</div>
+
+  <button 
+    *ngIf="resendCount < 3 && timer === 0" 
+    [style.color]="resendColor"
+    type="button"
+    (click)="resendOTP()">
+    Resend OTP
+  </button>
+
+  <div *ngIf="resendCount >= 3 && timer === 0" style="color: red;">Max OTP Resend Limit Reached</div>
+
+  <br/><br/>
+  <button type="submit">Submit</button>
+</form>
